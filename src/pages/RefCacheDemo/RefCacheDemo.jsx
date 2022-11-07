@@ -46,18 +46,12 @@ export default function TestRef() {
   return (
     <div>
       <span>header</span>
+      <RegularComponent></RegularComponent>
       <CachedComponent key={'102837987'} node={testRef.current}></CachedComponent>
       <CachedComponent node={cacheDom}></CachedComponent>
-      <RegularComponent></RegularComponent>
-      <RegularComponent></RegularComponent>
-      <RegularComponent></RegularComponent>
-      <RegularComponent></RegularComponent>
-      <RegularComponent></RegularComponent>
       <CachedComponent node={testRef.current}></CachedComponent>
-      <CachedComponent key={'xxx830178'} node={testRef.current}></CachedComponent>
       <CachedComponent2 key={'120937812'} node={testRef.current}></CachedComponent2>
       <CachedComponent node={cacheDom}></CachedComponent>
-      <CachedComponent2 key={'012983748'} node={testRef.current}></CachedComponent2>
       <span>Other components</span>
       <div ref={testRef}>useRef cached dom</div>
       <div
