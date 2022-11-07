@@ -1,52 +1,45 @@
-import React, { useState } from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom/client'
-import KeepAlive, { AliveScope } from './KeepAlive'
-import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom'
-import ErrorPage from './ErrorPage.jsx'
-import TestRef from './TestRef'
-
-function Counter() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <div>
-      count:{count}
-      <button onClick={() => setCount((count) => count + 1)}>add</button>
-    </div>
-  )
-}
-
-function App() {
-  const [show, setShow] = useState(true)
-  return (
-    <div>
-      <button onClick={() => setShow((show) => !show)}>Toggle</button>
-      <p>无 KeepAlive</p>
-      {show && <Counter />}
-      <p>有 KeepAlive</p>
-      {show && (
-        <KeepAlive id="Test">
-          <Counter />
-        </KeepAlive>
-      )}
-    </div>
-  )
-}
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import App from './App'
+import ErrorPage from './ErrorPage'
+import KeepAliveDemo from './pages/KeepAliveDemo/KeepAliveDemo'
+import RefCacheDemo from './pages/RefCacheDemo/RefCacheDemo'
+import DemoLayout from './DemoLayout'
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: (
-      <AliveScope>
-        <App />
-      </AliveScope>
-    ),
+    element: <App />,
     errorElement: <ErrorPage />,
   },
   {
-    path: 'test-ref',
-    element: <TestRef/>,
+    path: '/demo',
+    element: <DemoLayout />,
+    children: [
+      {
+        path: 'keepalive-demo',
+        element: <KeepAliveDemo />,
+      },
+      {
+        path: 'cache-demo',
+        element: <RefCacheDemo />,
+      },
+    ],
   },
+  // {
+  //   path: '/keepalive-demo',
+  //   element: <KeepAliveDemo />,
+  // },
+
+  // {
+  //   path: '/cache-demo',
+  //   element: <RefCacheDemo />,
+  // },
 ])
 
-ReactDOM.createRoot(document.getElementById('root')).render(<RouterProvider router={router}></RouterProvider>)
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <RouterProvider router={router} />
+  </React.StrictMode>
+)

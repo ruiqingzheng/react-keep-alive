@@ -44,7 +44,7 @@ class KeepAlive extends Component {
 
   init = async ({ id, children, keep }) => {
     const realContent = await keep(id, children)
-    this.placeholder.appendChild(realContent)
+    this.placeholder && this.placeholder.appendChild(realContent)
   }
 
   render() {
